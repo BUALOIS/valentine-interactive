@@ -4,29 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sarah Valentine 💖</title>
+
 <style>
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   background: #f0f8f0;
-  color: #333;
   text-align: center;
-  overflow-x: hidden;
   margin: 0;
   padding: 20px;
+  overflow-x: hidden;
 }
-#dino-container{
-  position:relative;
-  width:100%;
-  height:150px;
-  overflow:hidden;
-  margin-bottom:20px;
-}
-#dino{
-  position:absolute;
-  bottom:0;
-  width:120px;
-}
-h1,h2 { color: #e63946; }
+
+h1 { color: #e63946; }
+
+.hidden { display: none; }
+
 button {
   font-size: 1.2em;
   padding: 12px 25px;
@@ -35,138 +27,157 @@ button {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
 }
-#oui { background-color: #e63946; color: white; }
-#non { background-color: #f1c40f; color: white; }
-.hidden { display: none; }
-#photo-final { margin-top: 20px; border-radius: 12px; max-width: 90%; height: auto; }
-#video-cadenas { margin-top: 20px; border-radius: 12px; max-width: 90%; height: auto; }
-.clickable { color: #e63946; cursor: pointer; font-weight: bold; }
-#explosion { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1000; }
-.heart { position:absolute; font-size:24px; animation:fly 2s linear forwards; }
+
+#oui { background: #e63946; color: white; }
+#non { background: #f1c40f; color: white; }
+
+#photo-final {
+  margin-top: 20px;
+  border-radius: 12px;
+  max-width: 90%;
+}
+
+#explosion {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1000;
+}
+
+.heart {
+  position:absolute;
+  font-size:24px;
+  animation:fly 2s linear forwards;
+}
+
 @keyframes fly {
   0% {transform: translate(0,0) rotate(0deg); opacity:1;}
   100% {transform: translate(var(--x), var(--y)) rotate(360deg); opacity:0;}
 }
-#loading-love{
-  margin-top:20px;
-  display:flex;
-  justify-content:center;
-  gap:8px;
+
+#dino-container {
+  position:relative;
+  height:150px;
+  overflow:hidden;
 }
-.dot{
-  width:12px;
-  height:12px;
-  background:#e63946;
-  border-radius:50%;
-  animation:bounce 1.2s infinite ease-in-out;
-}
-.dot:nth-child(2){ animation-delay:0.2s; }
-.dot:nth-child(3){ animation-delay:0.4s; }
-@keyframes bounce{
-  0%, 80%, 100% { transform:scale(0); }
-  40% { transform:scale(1); }
+
+#dino {
+  position:absolute;
+  bottom:0;
+  width:120px;
 }
 </style>
 </head>
+
 <body>
 
-<!-- ETAPE 1 : Mini-test -->
+<!-- ETAPE 1 -->
 <div id="etape1">
   <h1>Mini-Test 💖</h1>
+
   <div id="dino-container">
-    <img id="dino" src="dino.gif" alt="Dinosaure">
+    <img id="dino" src="dino.gif">
   </div>
-  <p>Pour combien d’euros serais-je capable de ne plus te parler… <span id="jamais" class="clickable">jamais</span> ?</p>
-  <div id="loading-love">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-  <div>
-    <button onclick="choixMontant(10)">10€</button>
-    <button onclick="choixMontant(1000)">1 000€</button>
-    <button onclick="choixMontant(100000)">100 000€</button>
-  </div>
+
+  <p>
+    Pour combien d’euros serais-je capable de ne plus te parler…
+    <span id="jamais" style="color:#e63946; cursor:pointer; font-weight:bold;">jamais</span> ?
+  </p>
+
+  <button onclick="choixMontant(10)">10€</button>
+  <button onclick="choixMontant(1000)">1 000€</button>
+  <button onclick="choixMontant(100000)">100 000€</button>
+
   <p id="reponse-test"></p>
 </div>
 
-<!-- ETAPE 2 : Love Bombing -->
+<!-- ETAPE 2 -->
 <div id="etape2" class="hidden">
   <h1>Toi + Moi 💫</h1>
-  <div id="love-game">
-    <div class="question" id="q1">
-      <p>Combien pèse un T-Rex ?</p>
-      <button id="btn1">Réponse</button>
-    </div>
-    <div class="question hidden" id="q2">
-      <p>Combien je pèse ?</p>
-      <button id="btn2">Réponse</button>
-    </div>
-    <div class="question hidden" id="q3">
-      <p>Comment s’appelle mon caleçon préféré ?</p>
-      <button id="btn3">Réponse</button>
-    </div>
-    <button id="continuer-love" class="hidden" onclick="continuerEtape3()">Continuer</button>
+
+  <div id="q1">
+    <p>Combien pèse un T-Rex ?</p>
+    <button onclick="reponseLove(1)">Réponse</button>
   </div>
+
+  <div id="q2" class="hidden">
+    <p>Combien je pèse ?</p>
+    <button onclick="reponseLove(2)">Réponse</button>
+  </div>
+
+  <div id="q3" class="hidden">
+    <p>Comment s’appelle mon caleçon préféré ?</p>
+    <button onclick="reponseLove(3)">Réponse</button>
+  </div>
+
+  <button id="continuer-love" class="hidden" onclick="continuerEtape3()">Continuer</button>
 </div>
 
-<!-- ETAPE 3 : Vidéo -->
+<!-- ETAPE 3 -->
 <div id="etape3" class="hidden">
   <video id="video-cadenas" width="600" controls>
     <source src="pont.mp4" type="video/mp4">
   </video>
+
   <p id="after-video-text" class="hidden" style="font-size:1.3em; margin-top:20px;">
-    Ah ouais… tu me dis des mots doux maintenant 😌<br>
-    Je pensais pas qu’on était si proches 😉
+    Ah ouais… tu me dis des mots doux maintenant 😌
   </p>
+
   <button onclick="continuerEtape4()">Continuer</button>
 </div>
 
-<!-- ETAPE 4 : Décision finale -->
+<!-- ETAPE 4 -->
 <div id="etape4" class="hidden" style="position:relative; height:400px;">
   <h1>Veux-tu être ma Valentine ? 💐</h1>
-  <button id="oui" style="position:absolute; left:40%; top:50%;" disabled>Oui ❤️</button>
+
+  <button id="oui" style="position:absolute; left:40%; top:50%;">Oui ❤️</button>
   <button id="non" style="position:absolute; left:60%; top:50%;">Non 💔</button>
 </div>
 
 <div id="explosion"></div>
-<img id="photo-final" src="sarah2.jpg" class="hidden" alt="Photo de nous">
+
+<img id="photo-final" src="sarah2.jpg" class="hidden">
+
 <div id="texte-final" class="hidden">
-  <h1>OFFICIELLEMENT<br>Ma Valentine pour la semaine prochaine💐</h1>
-  <p>Merci d’être incroyable,<br>ne change jamais.<br><br>Même les dinosaures auraient survécu avec toi 🦕❤️<br>Parce que tu rends tout plus simple, plus lumineux, et tellement plus doux.</p>
+  <h1>OFFICIELLEMENT<br>Ma Valentine 💐</h1>
+  <p>
+    Merci d’être incroyable.<br>
+    Même les dinosaures auraient survécu avec toi 🦕❤️
+  </p>
 </div>
 
 <script>
-/* ---------------- ETAPE 1 ---------------- */
-function choixMontant(montant){
-  let texte='';
-  if(montant===10) texte="10€ ? Tu vaux bien plus qu’un 4h à 4h du matin 😘";
-  else if(montant===1000) texte="1 000€ ? Tu vaux bien plus qu’un canapé-lit 🛋️";
-  else if(montant===100000) texte="100 000€ ? Même avec tout ça, aucune somme ne te remplace ❤️";
-  document.getElementById('reponse-test').innerText=texte;
+
+/* ETAPE 1 */
+function choixMontant(m){
+  let t='';
+  if(m===10) t="10€ ? Tu vaux bien plus 😘";
+  if(m===1000) t="1 000€ ? Toujours pas 😌";
+  if(m===100000) t="Même pour ça… jamais ❤️";
+  document.getElementById('reponse-test').innerText=t;
 }
 
-document.getElementById('jamais').addEventListener('click', function(){
-  document.getElementById('reponse-test').innerText="Bonne réponse ! Certaines personnes se remplacent… toi non 💖";
+document.getElementById('jamais').onclick = ()=>{
+  document.getElementById('reponse-test').innerText="Bonne réponse 💖";
   setTimeout(()=>{
     document.getElementById('etape1').classList.add('hidden');
     document.getElementById('etape2').classList.remove('hidden');
-  },3000);
-});
+  },2000);
+};
 
-/* ---------------- ETAPE 2 ---------------- */
+/* ETAPE 2 */
 function reponseLove(num){
-  const q = document.getElementById('q'+num);
-  const btn = q.querySelector('button');
-  q.classList.add('hidden');
+  document.getElementById('q'+num).classList.add('hidden');
 
   let big=document.createElement('div');
   big.style.position='fixed';
   big.style.top='50%';
   big.style.left='50%';
-  big.style.transform='translate(-50%, -50%)';
+  big.style.transform='translate(-50%,-50%)';
   big.style.fontSize='2em';
   big.style.background='white';
   big.style.padding='30px';
@@ -175,35 +186,23 @@ function reponseLove(num){
   big.style.zIndex='9999';
   big.style.textAlign='center';
 
-  if(num===1) big.innerHTML="Un T-Rex pesait environ <br><strong>8 000 kg 🦖</strong>";
-  else if(num===2) big.innerHTML="Je pèse exactement <br><strong>78 kg 💪</strong>";
-  else if(num===3) big.innerHTML="Mon caleçon préféré s'appelle <br><strong>Boxer Rouge 😏</strong>";
+  if(num===1) big.innerHTML="8 000 kg 🦖";
+  if(num===2) big.innerHTML="78 kg 💪";
+  if(num===3) big.innerHTML="Boxer Rouge 😏";
 
   document.body.appendChild(big);
 
-  setTimeout(()=>
+  setTimeout(()=>{
     big.remove();
-    if(num<3) document.getElementById('q'+(num+1)).classList.remove('hidden');
-    else {
-      let bottom=document.createElement('div');
-      bottom.innerHTML="On a déjà tant de souvenirs et je nous voit en créer encore plus avec le temps qu’on passera ensemble ❤️";
-      bottom.style.position='fixed';
-      bottom.style.bottom='30px';
-      bottom.style.left='50%';
-      bottom.style.transform='translateX(-50%)';
-      bottom.style.fontSize='1.4em';
-      bottom.style.color='#e63946';
-      bottom.style.fontWeight='bold';
-      bottom.style.textAlign='center';
-      bottom.style.zIndex='999';
-      document.body.appendChild(bottom);
+    if(num<3){
+      document.getElementById('q'+(num+1)).classList.remove('hidden');
+    } else {
       document.getElementById('continuer-love').classList.remove('hidden');
     }
-  ;
+  },2000);
 }
 
-document.getElementById('continuer-love').addEventListener('click',()=>{
-  document.querySelectorAll("div[style*='bottom: 30px']").forEach(el=>el.remove());
+function continuerEtape3(){
   document.getElementById('etape2').classList.add('hidden');
   document.getElementById('etape3').classList.remove('hidden');
 
@@ -211,179 +210,71 @@ document.getElementById('continuer-love').addEventListener('click',()=>{
   video.currentTime=0;
   video.play();
 
-  // Afficher texte à la fin de la vidéo
-  video.addEventListener('ended',()=>{
+  video.onended = ()=>{
     document.getElementById('after-video-text').classList.remove('hidden');
-  });
-});function setupLongClick(btnId, num){
-  const btn = document.getElementById(btnId);
-  let timer;
-
-  btn.addEventListener('mousedown', ()=>{
-    btn.style.transform="scale(1.4)";
-    timer = setTimeout(()=>{
-      // Clic long validé
-      document.getElementById('q'+num).classList.add('hidden');
-      let big = document.createElement('div');
-      big.style.position='fixed';
-      big.style.top='50%';
-      big.style.left='50%';
-      big.style.transform='translate(-50%,-50%)';
-      big.style.fontSize='2em';
-      big.style.background='white';
-      big.style.padding='30px';
-      big.style.borderRadius='20px';
-      big.style.boxShadow='0 0 30px rgba(0,0,0,0.2)';
-      big.style.zIndex='9999';
-      big.style.textAlign='center';
-
-      if(num===1) big.innerHTML="Un T-Rex pesait environ <br><strong>8 000 kg 🦖</strong>";
-      else if(num===2) big.innerHTML="Je pèse exactement <br><strong>78 kg 💪</strong>";
-      else if(num===3) big.innerHTML="Mon caleçon préféré s'appelle <br><strong>Boxer Rouge 😏</strong>";
-
-      document.body.appendChild(big);
-
-      setTimeout(()=>{
-        big.remove();
-        if(num<3){
-          document.getElementById('q'+(num+1)).classList.remove('hidden');
-        } else {
-          let bottom = document.createElement('div');
-          bottom.innerHTML="On a déjà tant de souvenirs et je nous vois en créer encore plus avec le temps qu’on passera ensemble ❤️";
-          bottom.style.position='fixed';
-          bottom.style.bottom='30px';
-          bottom.style.left='50%';
-          bottom.style.transform='translateX(-50%)';
-          bottom.style.fontSize='1.4em';
-          bottom.style.color='#e63946';
-          bottom.style.fontWeight='bold';
-          bottom.style.textAlign='center';
-          bottom.style.zIndex='999';
-          document.body.appendChild(bottom);
-
-          document.getElementById('continuer-love').classList.remove('hidden');
-        }
-      }, 3000);
-
-    }, 1000); // durée clic long = 1 seconde
-  });
-
-  btn.addEventListener('mouseup', ()=>{
-    clearTimeout(timer);
-    btn.style.transform="scale(1)";
-  });
-
-  btn.addEventListener('mouseleave', ()=>{
-    clearTimeout(timer);
-    btn.style.transform="scale(1)";
-  });
+  };
 }
 
-// On configure tous les boutons
-setupLongClick('btn1',1);
-setupLongClick('btn2',2);
-setupLongClick('btn3',3);
-
-/* --- Continuer vers la vidéo --- */
-function continuerEtape3(){
-  document.getElementById('etape2').classList.add('hidden');
-  document.getElementById('etape3').classList.remove('hidden');
-
-  const video = document.getElementById('video-cadenas');
-  video.currentTime=0;
-  video.play();
-
-  // Afficher le texte automatiquement à la fin de la vidéo
-  video.addEventListener('ended', ()=>{
-    document.getElementById('after-video-text').classList.remove('hidden');
-  });
-}
-
-/* --- Continuer après la vidéo vers l'étape finale --- */
 function continuerEtape4(){
   document.getElementById('etape3').classList.add('hidden');
   document.getElementById('after-video-text').classList.add('hidden');
   document.getElementById('etape4').classList.remove('hidden');
-  document.getElementById('oui').disabled = false;
 }
 
-/* ---------------- ETAPE 4 ---------------- */
+/* ETAPE 4 */
+const oui=document.getElementById('oui');
+const non=document.getElementById('non');
 
-const boutonOui = document.getElementById('oui');
-const boutonNon = document.getElementById('non');
-const explosion = document.getElementById('explosion');
-
-let clickTime = 0;
-let requiredHoldTime = 1200; // 1.2 secondes clic long pour Oui
-let nonMoves = 0;
-
-// Fonction pour déplacer un bouton aléatoirement mais rester dans l'écran
-function randomPosition(element){
-  const container = document.getElementById('etape4');
-  const maxX = container.offsetWidth - element.offsetWidth;
-  const maxY = container.offsetHeight - element.offsetHeight;
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-  element.style.left = x + 'px';
-  element.style.top = y + 'px';
+function randomPosition(el){
+  const container=document.getElementById('etape4');
+  const maxX=container.offsetWidth-el.offsetWidth;
+  const maxY=container.offsetHeight-el.offsetHeight;
+  el.style.left=Math.random()*maxX+"px";
+  el.style.top=Math.random()*maxY+"px";
 }
 
-// Déplacement du bouton NON à l'approche de la souris
-boutonNon.addEventListener('mouseenter', ()=>{
-  nonMoves++;
-  randomPosition(boutonNon);
+non.addEventListener('mouseenter',()=>{
+  randomPosition(non);
 });
 
-// Bouton OUI : clic long pour réussir
-boutonOui.addEventListener('mousedown', ()=>{
-  clickTime = Date.now();
-});
-boutonOui.addEventListener('mouseup', ()=>{
-  let held = Date.now() - clickTime;
-  if(held >= requiredHoldTime && nonMoves >= 5){
-    // Gagner le jeu
-    document.getElementById('etape4').classList.add('hidden');
-    creerExplosion();
-    document.getElementById('photo-final').classList.remove('hidden');
-    document.getElementById('texte-final').classList.remove('hidden');
-  } else {
-    // Si pas assez longtemps ou pas assez de mouvements, le bouton Oui rebondit légèrement
-    randomPosition(boutonOui);
-  }
+oui.addEventListener('click',()=>{
+  document.getElementById('etape4').classList.add('hidden');
+  creerExplosion();
+  document.getElementById('photo-final').classList.remove('hidden');
+  document.getElementById('texte-final').classList.remove('hidden');
 });
 
-// Explosion de cœurs
+/* Explosion */
 function creerExplosion(){
+  const exp=document.getElementById('explosion');
   for(let i=0;i<50;i++){
     let heart=document.createElement('div');
-    heart.classList.add('heart');
+    heart.className='heart';
     heart.innerText='❤️';
     heart.style.left=Math.random()*window.innerWidth+'px';
     heart.style.top=Math.random()*window.innerHeight+'px';
     heart.style.setProperty('--x',(Math.random()*400-200)+'px');
     heart.style.setProperty('--y',(Math.random()*-400-100)+'px');
-    explosion.appendChild(heart);
-    setTimeout(()=>{heart.remove();},2000);
+    exp.appendChild(heart);
+    setTimeout(()=>heart.remove(),2000);
   }
 }
 
-
-/* ---------------- Dinosaure animé ---------------- */
+/* Dino animation */
 const dino=document.getElementById('dino');
-let dinoPos=0,dinoDir=1;
+let pos=0,dir=1;
 function moveDino(){
   const w=document.getElementById('dino-container').offsetWidth;
   const dw=dino.offsetWidth;
-  dinoPos+=2*dinoDir;
-  if(dinoPos+dw>=w){dinoDir=-1;dino.style.transform='scaleX(-1)';}
-  if(dinoPos<=0){dinoDir=1;dino.style.transform='scaleX(1)';}
-  dino.style.left=dinoPos+'px';
+  pos+=2*dir;
+  if(pos+dw>=w){dir=-1; dino.style.transform='scaleX(-1)';}
+  if(pos<=0){dir=1; dino.style.transform='scaleX(1)';}
+  dino.style.left=pos+'px';
   requestAnimationFrame(moveDino);
 }
 moveDino();
+
 </script>
 
 </body>
 </html>
-
-
