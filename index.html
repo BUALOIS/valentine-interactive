@@ -181,7 +181,7 @@ function reponseLove(num){
 
   document.body.appendChild(big);
 
-  setTimeout(()=>{
+  setTimeout(()=>
     big.remove();
     if(num<3) document.getElementById('q'+(num+1)).classList.remove('hidden');
     else {
@@ -199,7 +199,7 @@ function reponseLove(num){
       document.body.appendChild(bottom);
       document.getElementById('continuer-love').classList.remove('hidden');
     }
-  },2800);
+  ;
 }
 
 document.getElementById('continuer-love').addEventListener('click',()=>{
@@ -385,4 +385,5 @@ moveDino();
 
 </body>
 </html>
+
 
